@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+pydantic
+faiss-cpu
+sentence-transformers
+python-multipart
+sqlite-utils
