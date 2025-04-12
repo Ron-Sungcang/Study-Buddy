@@ -37,3 +37,30 @@ stages:
               npm install
               npm run build
             displayName: Install and Build Frontend
+
+  - stage: Backend_Build
+    displayName: Build FastAPI Backend
+    jobs:
+      - job: Build_backend
+        displayName: Install Backend Deps
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps: 
+          - checkout: self
+
+          - task: Cache@2
+            inputs:
+              key: 'pip | "$(Agent.OS)" | backend/requirements.txt'
+              restoreKeys: |
+                pip | "$(Agent.OS)"
+              path: $(PIP_CACHE_DIR)
+
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.11'
+          
+          - script: |
+              cd backend
+              python -m pip install --upgrade pip
+              pip install -r requirements.txt
+            displayName: Install Backend
