@@ -3,3 +3,37 @@ trigger:
     include:
       - main
       - development
+
+pr:
+  branches:
+    include:
+      - main
+      - development
+
+stages:
+  - stage: Frontend_Build
+    displayName: Build React Frontend
+    jobs:
+      - job: Build_Frontend
+        displayName: Build react App
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps: 
+          - checkout: self
+
+          - task: Cache@2
+            inputs:
+              key: 'npm | "$(Agent.OS)" | frontend/package-lock.json'
+              restoreKeys: |
+                npm | "$(Agent.OS)"
+              path: frontend/node_modules
+
+          - task: NodeTool@0
+            inputs: 
+              versionSpec: '20.x'
+          
+          - script: |
+              cd frontend
+              npm install
+              npm run build
+            displayName: Install and Build Frontend
