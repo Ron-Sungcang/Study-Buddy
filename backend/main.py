@@ -8,7 +8,6 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",
-    "https://<username>.github.io/<repository-name>"
 ]
 
 app.add_middleware(
@@ -26,7 +25,11 @@ class Item(BaseModel):
     price: float
     tax: float = None
 
-#Dummy endpoint
+#Dummy endpoints
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
+
 @app.post("/items/")
 async def create_item(item: Item):
     return {"name": item.name, "price": item.price}
