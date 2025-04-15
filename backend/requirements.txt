@@ -1,8 +1,9 @@
 fastapi
-uvicorn
+uvicorn[standard]
 pydantic
 faiss-cpu
 sentence-transformers
 python-multipart
 sqlite-utils
 pytest
+httpx

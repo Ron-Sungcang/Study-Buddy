@@ -1,4 +1,7 @@
+#ignore python files
 venv/
+__pycache__/
+.pytest_cache/
 
 #ignore node modules
 node_modules/

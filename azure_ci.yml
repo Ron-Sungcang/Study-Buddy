@@ -61,6 +61,8 @@ stages:
           
           - script: |
               cd backend
-              python -m pip install --upgrade pip
+              python -m venv venv
+              source venv/bin/activate
+              python -m pip install --upgrade pip 
               pip install -r requirements.txt
             displayName: Install Backend
