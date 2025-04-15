@@ -6,14 +6,15 @@ const config: JestConfigWithTsJest = {
     "^.+\\.tsx?$": [
       "ts-jest",
       {
-        tsconfig: "<rootDir>/tsconfig.app.json",
+        tsconfig: "<rootDir>/tsconfig.json",
       },
     ],
   },
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   moduleNameMapper: {
+    '\\.svg$': '<rootDir>/mocks/fileMock.tsx',
     '^~/(.*)$': '<rootDir>/app/$1',
   },
 };
 
-export default config;
+module.exports = config;
