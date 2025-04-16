@@ -1,5 +1,7 @@
 from fastapi import APIRouter
 from app.models.prompts import UserPrompt
+from datetime import datetime, timezone
+
 
 router = APIRouter()
 
@@ -13,5 +15,5 @@ async def create_item(prompt: UserPrompt):
         "name": prompt.name,
         "message": prompt.message,
         "subject": prompt.subject,
-        "date": prompt.date.isoformat()  
+        "date": datetime.now(timezone.utc)
         }

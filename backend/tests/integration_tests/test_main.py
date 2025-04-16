@@ -5,15 +5,21 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"
 
 from fastapi.testclient import TestClient
 from main import app
+from datetime import datetime, timezone
 
 client = TestClient(app)
 
 def test_create_item():
-    response = client.post("/items/", json={
-        "name": "Test Item",
-        "description": "A test item",
-        "price": 99.99,
-        "tax": 5.0
+    curr_date = datetime.now(timezone.utc).isoformat()
+    response = client.post("/app/messages", json={
+        "name": "Test User",
+        "message": "Hello from test!",
+        "subject": "Testing",
+        "date": curr_date
     })
     assert response.status_code == 200
-    assert response.json() == {"name": "Test Item", "price": 99.99}
+    response_data = response.json()
+
+    assert response_data["name"] == "Test User"
+    assert response_data["message"] == "Hello from test!"
+    assert response_data["subject"] == "Testing"
