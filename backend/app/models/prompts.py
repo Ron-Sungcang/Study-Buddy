@@ -6,4 +6,4 @@ class UserPrompt(BaseModel):
     name: str = None
     message: str
     subject: str
-    date: datetime = Field(default_factory=datetime.timezone.utc)
+    date: datetime = Field(default_factory=datetime.astimezone)
